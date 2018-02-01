@@ -5,10 +5,13 @@
  */
 
 import React, { Component } from 'react';
+import TabNavigator from 'react-native-tab-navigator'
+import NavigationBar from './widget/NavigationBar'
 import {
   Platform,
   StyleSheet,
   Text,
+    Image,
   View
 } from 'react-native';
 
@@ -19,39 +22,88 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+
 export default class App extends Component<{}> {
+  constructor(){
+    super();
+    this.state={
+        selectedTab:'精选'
+    }
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+        <View style={styles.container}>
+            <NavigationBar
+                title={this.state.selectedTab.valueOf()}
+                style={{backgroundColor:'red'}}
+            />
+            <TabNavigator>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === '精选'}
+                    selectedTitleStyle={{color:'#5dc890'}}
+                    title="精选"
+                    renderIcon={() => <Image style={styles.img} source={require('./res/img/jinxuan_gray.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/jinxuan_green.png')} />}
+                    onPress={() => this.setState({ selectedTab: '精选' })}>
+                    <View style={styles.page1}/>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === '书架'}
+                    selectedTitleStyle={{color:'#5dc890'}}
+                    title="书架"
+                    renderIcon={() => <Image style={styles.img} source={require('./res/img/shujia_gray.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/shujia_green.png')} />}
+                    onPress={() => this.setState({ selectedTab: '书架' })}>
+                    <View style={styles.page2}/>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === '发现'}
+                    selectedTitleStyle={{color:'#5dc890'}}
+                    title="发现"
+                    renderIcon={() => <Image style={styles.img} source={require('./res/img/faxian_gray.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/faxian_green.png')} />}
+                    onPress={() => this.setState({ selectedTab: '发现' })}>
+                    <View style={styles.page3}/>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === '我的'}
+                    selectedTitleStyle={{color:'#5dc890'}}
+                    title="我的"
+                    renderIcon={() => <Image style={styles.img} source={require('./res/img/wode_gray.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/wode_green.png')} />}
+                    onPress={() => this.setState({ selectedTab: '我的' })}>
+                    <View style={styles.page4}/>
+                </TabNavigator.Item>
+            </TabNavigator>
+        </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container:{ flex: 1,
+        backgroundColor:'gray'
+    },
+  page1:{
+        flex: 1,
+        backgroundColor:'red',
+    },
+    page2:{
+        flex: 1,
+        backgroundColor:'yellow',
+    },
+    page3:{
+        flex: 1,
+        backgroundColor:'green',
+    },
+    page4:{
+        flex: 1,
+        backgroundColor:'blue',
+    },
+    img:{
+      width:22,
+      height:22
+    }
+
 });
