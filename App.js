@@ -7,6 +7,8 @@
 import React, { Component } from 'react';
 import TabNavigator from 'react-native-tab-navigator'
 import NavigationBar from './widget/NavigationBar'
+import ListViewTest from './app/page/ListViewTest'
+import FetchTest from './app/page/FetchTest'
 import {
   Platform,
   StyleSheet,
@@ -45,7 +47,7 @@ export default class App extends Component<{}> {
                     renderIcon={() => <Image style={styles.img} source={require('./res/img/jinxuan_gray.png')} />}
                     renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/jinxuan_green.png')} />}
                     onPress={() => this.setState({ selectedTab: '精选' })}>
-                    <View style={styles.page1}/>
+                    <ListViewTest/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '书架'}
@@ -54,7 +56,7 @@ export default class App extends Component<{}> {
                     renderIcon={() => <Image style={styles.img} source={require('./res/img/shujia_gray.png')} />}
                     renderSelectedIcon={() => <Image style={styles.img} source={require('./res/img/shujia_green.png')} />}
                     onPress={() => this.setState({ selectedTab: '书架' })}>
-                    <View style={styles.page2}/>
+                    <FetchTest />
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '发现'}
